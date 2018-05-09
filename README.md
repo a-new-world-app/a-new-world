@@ -25,15 +25,15 @@ The reasoning behind our choice making it a game is that gamification has proven
 
 ## Gameplay
 ### Route Creation
-![Map Input Wireframe](/assets/readmeAssets/Map_Input.jpg "Map Input Wireframe")
+![Map Input Wireframe](/assets/readmeAssets/Map_Input.jpg "Map Input Wireframe") \
 In this portion of the gameplay the user will be given an embedded map with a route.  They will be tasked with providing a series of directions and pictures, according to the guidelines provided, that would allow another user to follow same path without the embedded map.
 
 ### Route Following
-![Map Following Wireframe](/assets/readmeAssets/Map_Following.jpg "Map Following Wireframe")
+![Map Following Wireframe](/assets/readmeAssets/Map_Following.jpg "Map Following Wireframe")\
 In this phase of the gameplay a user will be given a series of directions along with corresponding pictures.  They will use these directions to go between waypoints.  Users can click on the thumbnail image for a particular direction to see a full-screen view of the image.  Users also have the ability to rate images based on how helpful they are and request a new/different direction if the one provided is not sufficient.
 
 ### Waypoint Gameplay
-![Action Gameplay](/assets/readmeAssets/Action_Gameplay.jpg "Action Gameplay")
+![Action Gameplay](/assets/readmeAssets/Action_Gameplay.jpg "Action Gameplay")\
 The specifics of this portion will depend on how much time is necessary to complete the route creation and route following portions of coding.  Ideally we would like to build a simplistic stealth or shoot em up type game but as a backup we would make a simple decoding wordgame.  For scalability we would need this to be engaging to increase user base.
 
 ### Game order
@@ -62,4 +62,4 @@ Initial prompt for caution would appear before user is given login screen.  Upon
 * Rewards systm to include items
 * Waypoint Gameplay to include use of items
 ## Crowdsourcing Plan
-To increase user base we plan to recruit people we know to try the app.  We also plan to make posts on websites relavant to SF or games in general.  We plan to train users using an in-game tutorial.  We plan to motivate users to create high-quality data by rewarding the creation of data based on how useful other members of the team find it to be.  We plan to motivate these reviews also using in-game rewards.
+To increase user base we plan to recruit people we know to try the app.  We also plan to make posts on websites relavant to SF or games in general.  We plan to train users using an in-game tutorial.  We plan to motivate users to create high-quality data by rewarding the creation of data based on how useful other members of the team find it to be.  We plan to motivate these reviews also using in-game rewards.  We would also be very interested in integrating any suggestions the Google team may have to crowdsource volunteers.
