@@ -41,8 +41,11 @@ Initial prompt for caution would appear before user is given login screen.  Upon
 
 ## Timeframe
 * 5/16 - 5/19: Learning necessary technologies and deciding which technologies we would need/desire to use in our app
-* 5/20 - 5/24: Creation of Route Creation/Following gameplay
-* 5/25 - 5/31: Creation of Waypoint Gameplay/Rewards System
+* 5/20 - 5/22: Creation of basic backend to handle routes (1 person, 3 days)
+* 5/20 - 5/24: Creation of Route Creation gameplay (1 person, 5 days)
+* 5/20 - 5/24: Creation of Route Following gameplay/route review system (1 person, 5 days)
+* 5/25 - 5/31: Creation of Waypoint Gameplay (2 people, 1 week)
+* 5/25 - 5/31: Creation of rewards system and user/character page (1 person, 1 week)
 
 ## Goals
 ### Minimum Viable Goals
@@ -50,11 +53,13 @@ Initial prompt for caution would appear before user is given login screen.  Upon
 * Routes able to be stored to database
 * Rating system for routes functional
 * Functional rewards system
+* User/character page
 
 ### Additional Goals
 * Waypoint Gameplay compelling enough to maintain user engagement
-* User/character page
 * Rewards system of badges to display on user page
 * Inventory system in game
 * Rewards systm to include items
 * Waypoint Gameplay to include use of items
+## Crowdsourcing Plan
+To increase user base we plan to recruit people we know to try the app.  We also plan to make posts on websites relavant to SF or games in general.  We plan to train users using an in-game tutorial.  We plan to motivate users to create high-quality data by rewarding the creation of data based on how useful other members of the team find it to be.  We plan to motivate these reviews also using in-game rewards.
