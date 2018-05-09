@@ -10,6 +10,24 @@ The purpose of this project is to come up with a novel method by which to collec
 ## Rational
 The reasoning behind our choice making it a game is that gamification has proven successful in croudsourcing data collection, eg. Foldit.  We have seperated the game into two different portions, collecting and rating directions, as we believe that as the amount of data collected going up increases a method would need to be in place to rate the data as improved data would likely improve the quality of the output AI. We are planning to offer in-game rewards to people for completion of either of these tasks as we believe that this would scale better than monitary compensation.
 
+## Team Members
+* Ian Macleod
+  * Three years web development experience
+  * Intermediate level understanding of Java
+  * Will be in charge of creation of route follower gameplay and rewards system.
+  * Will be in charge of creating user/character page
+* TingTing Jiang
+  * Proficient in server interaction and database storage 
+  * Introductory level understanding of Unity game development
+  * Will be in charge of creation of backend to store routes and character information
+  * Will work with Jon Halloran on creation of waypoint gameplay
+* Jon Halloran
+  * Intermediate level ability in Java including previous production of simplistic apps
+  * Introductory level understanding of Unity game development
+  * Will be in charge of interface to allow users to create route directions
+  * Will work with TingTing on cretion of waypoint gameplay 
+
+
 ## Technologies
 * Unity (2 people have gone through basic tutorials up to making an APK)
   * Unity is being used due to it appearing to be simple to create a reasonably interesting game given sprites
