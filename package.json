@@ -4,6 +4,7 @@
   "description": "## Overview This is a game that is set on an alien planet that you landed along with your robot assistant.  You start the game with one robot that is OK at many things.  You then build more that are good at different things.  Goal of the game is to get as many robot assistants as you can.  Motivation for creating and reviewing routes will be the collection of resources that will allow the creation of additional robots.",
   "main": "index.js",
   "dependencies": {
+    "cookie-session": "^2.0.0-beta.3",
     "express": "^4.16.3",
     "mongoose": "^5.1.1",
     "nodemon": "^1.17.4",
