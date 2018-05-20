@@ -11,9 +11,14 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0"
   },
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.6.0"
+  },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
