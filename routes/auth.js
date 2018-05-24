@@ -1,4 +1,6 @@
 const passport = require("passport");
+const mongoose = require("mongoose");
+const User = mongoose.model("users");
 
 module.exports = app => {
   app.get(
@@ -11,8 +13,11 @@ module.exports = app => {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google"),
-    (req, res) => {
-      res.redirect(`a-new-world://login?user=${JSON.stringify(req.user)}`);
+    async (req, res) => {
+      const user = await User.findById(req.user._id);
+      token = "123"
+      user.sessionToken = token;
+      res.redirect(`a-new-world://login?token=${user.sessionToken}`);
     }
   );
 
