@@ -1,5 +1,7 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
+const crypto = require("crypto");
+
 const User = mongoose.model("users");
 
 module.exports = app => {
@@ -15,9 +17,12 @@ module.exports = app => {
     passport.authenticate("google"),
     async (req, res) => {
       const user = await User.findById(req.user._id);
-      token = "123"
-      user.sessionToken = token;
-      res.redirect(`a-new-world://login?token=${user.sessionToken}`);
+      crypto.randomBytes(48, function (err, buffer) {
+        var token = buffer.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
+        user.sessionToken = token;
+        user.save();
+        res.redirect(`a-new-world://login?token=${user.sessionToken}`);
+      });
     }
   );
 
