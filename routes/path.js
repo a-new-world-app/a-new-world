@@ -9,8 +9,6 @@ module.exports = app => {
     const sessionToken = req.get("Authorization").match(/Bearer (.+)/);
     const user = await User.findOne({sessionToken});
     path.userId = user.id;
-    console.log(path);
-    console.log(req.body);
     await path.save();
     res.json("things happened");
   });
