@@ -41,7 +41,6 @@ module.exports = app => {
     }
     const sessionToken = auth.match(/Bearer (.+)/);
     const user = await User.findOne({ sessionToken });
-    console.log(JSON.stringify({ sessionToken: user.sessionToken }));
-    res.json(JSON.stringify({ sessionToken: user.sessionToken }));
+    res.json({ sessionToken: user.sessionToken });
   });
 };
