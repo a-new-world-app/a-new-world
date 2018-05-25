@@ -35,7 +35,11 @@ module.exports = app => {
   });
 
   app.get("/api/current_user", async (req, res) => {
-    const sessionToken = req.get("Authorization").match(/Bearer (.+)/);
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
     const user = await User.findOne({ sessionToken });
     console.log(JSON.stringify({ sessionToken: user.sessionToken }));
     res.json(JSON.stringify({ sessionToken: user.sessionToken }));
