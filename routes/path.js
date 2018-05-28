@@ -19,6 +19,22 @@ module.exports = app => {
     res.json(path);
   });
 
+  app.patch("/api/paths", async (req, res) => {
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
+    const user = await User.findOne({ sessionToken });
+    const path = Path.find(req.body.path._id);
+    if (path.userId !== user.id) {
+      return res.status(403).json("Authorization required");
+    }
+    path.pathData = req.body.path.pathData;
+    await path.save;
+    res.json(path);
+  });
+
   app.post("/api/paths/images", async (req, res) => {
     stream = cloudinary.uploader.upload_stream(
       function(result) {
