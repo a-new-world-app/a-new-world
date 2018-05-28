@@ -17,8 +17,11 @@ module.exports = app => {
     passport.authenticate("google"),
     async (req, res) => {
       const user = await User.findById(req.user._id);
-      crypto.randomBytes(48, function (err, buffer) {
-        var token = buffer.toString('base64').replace(/\//g, '_').replace(/\+/g, '-');
+      crypto.randomBytes(48, function(err, buffer) {
+        var token = buffer
+          .toString("base64")
+          .replace(/\//g, "_")
+          .replace(/\+/g, "-");
         user.sessionToken = token;
         user.save();
         res.redirect(`a-new-world://login?token=${user.sessionToken}`);
@@ -31,7 +34,13 @@ module.exports = app => {
     res.json("placeholder");
   });
 
-  app.get("/api/current_user", (req, res) => {
-    res.json(req.user);
+  app.get("/api/current_user", async (req, res) => {
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
+    const user = await User.findOne({ sessionToken });
+    res.json({ sessionToken: user.sessionToken });
   });
 };
