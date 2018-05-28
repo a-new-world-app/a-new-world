@@ -6,6 +6,24 @@ const Path = mongoose.model("paths");
 const User = mongoose.model("users");
 
 module.exports = app => {
+  app.get("/api/current_path", async (req, res) => {
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
+    const user = await User.findOne({ sessionToken });
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+
+    if (user.activePathId) {
+      const path = await Path.findById(user.activePathId);
+      return res.json(path);
+    }
+    res.json("no active path");
+  });
+
   app.post("/api/paths", async (req, res) => {
     const auth = req.get("Authorization");
     if (!auth) {
@@ -13,9 +31,15 @@ module.exports = app => {
     }
     const sessionToken = auth.match(/Bearer (.+)/);
     const user = await User.findOne({ sessionToken });
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+
     const path = new Path(req.body.path);
     path.userId = user.id;
     await path.save();
+    user.activePathId = path.id;
+    user.save();
     res.json(path);
   });
 
@@ -26,7 +50,11 @@ module.exports = app => {
     }
     const sessionToken = auth.match(/Bearer (.+)/);
     const user = await User.findOne({ sessionToken });
-    const path = Path.find(req.body.path._id);
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+
+    const path = Path.findById(req.body.path._id);
     if (path.userId !== user.id) {
       return res.status(403).json("Authorization required");
     }
@@ -35,7 +63,23 @@ module.exports = app => {
     res.json(path);
   });
 
-  app.post("/api/paths/images", async (req, res) => {
+  app.post("/api/paths/finish", async (req, res) => {
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
+    const user = await User.findOne({ sessionToken });
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+
+    user.activePathId = null;
+    await user.save();
+    res.json(user)
+  });
+
+  app.post("/api/paths/images", (req, res) => {
     stream = cloudinary.uploader.upload_stream(
       function(result) {
         console.log(result);
