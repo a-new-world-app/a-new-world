@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema({
   googleId: { type: String, index: { unique: true } },
-  sessionToken: { type: String, index: true }
+  sessionToken: { type: String, index: true },
+  gameData: {type: Object}
 });
 
 mongoose.model("users", userSchema);
