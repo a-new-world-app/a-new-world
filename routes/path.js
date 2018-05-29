@@ -43,7 +43,7 @@ module.exports = app => {
     res.json(path);
   });
 
-  app.patch("/api/paths", async (req, res) => {
+  app.patch("/api/paths/:id", async (req, res) => {
     const auth = req.get("Authorization");
     if (!auth) {
       return res.status(403).json("Authorization required");
@@ -54,7 +54,7 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
 
-    const path = Path.findById(req.body.path._id);
+    const path = Path.findById(id);
     if (path.userId !== user.id) {
       return res.status(403).json("Authorization required");
     }
