@@ -54,8 +54,8 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
 
-    const path = Path.findById(req.params.id);
-    if (path.userId !== user.id) {
+    const path = await Path.findById(req.params.id);
+    if (path.userId.toString() !== user.id) {
       return res.status(403).json("Authorization required");
     }
     path.pathData = req.body.path.pathData;
