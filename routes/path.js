@@ -5,6 +5,9 @@ var cloudinary = require("cloudinary");
 const Path = mongoose.model("paths");
 const User = mongoose.model("users");
 
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+
 module.exports = app => {
   app.get("/api/current_path", async (req, res) => {
     const auth = req.get("Authorization");
@@ -81,18 +84,12 @@ module.exports = app => {
     res.json(user);
   });
 
-  app.post("/api/paths/images", (req, res) => {
-    stream = cloudinary.uploader.upload_stream(
-      function(result) {
-        console.log(result);
-        res.json({ url: result.url, public_id: result.public_id });
-      },
-      { public_id: req.body.title }
-    );
-    fs
-      .createReadStream(req.files.image.path, { encoding: "binary" })
-      .on("data", stream.write)
-      .on("end", stream.end);
+  app.post("/api/paths/images", upload.single('picture'), (req, res) => {
+    console.log("file", req.file);
+    cloudinary.uploader.upload(req.file.path, image => {
+      console.log(image);
+      res.send(image.secure_url);
+    });
   });
 
   app.get("/api/completed_paths", async (req, res) => {
