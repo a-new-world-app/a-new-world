@@ -14,7 +14,7 @@ module.exports = app => {
     const user = await User.findOne({ sessionToken });
     user.gameData = gameData;
     await user.save();
-    res.json(user.gameData);
+    res.json(gameData);
   });
 
   app.get("/api/gamedata", async (req, res) => {
