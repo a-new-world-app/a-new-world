@@ -41,6 +41,10 @@ module.exports = app => {
     }
     const sessionToken = auth.match(/Bearer (.+)/);
     const user = await User.findOne({ sessionToken });
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+    
     res.json({ sessionToken: user.sessionToken });
   });
 };
