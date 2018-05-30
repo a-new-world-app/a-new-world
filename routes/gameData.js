@@ -16,9 +16,7 @@ module.exports = app => {
     await user.save();
     res.json(user.gameData);
   });
-};
 
-module.exports = app => {
   app.get("/api/gamedata", async (req, res) => {
     const auth = req.get("Authorization");
     if (!auth) {
