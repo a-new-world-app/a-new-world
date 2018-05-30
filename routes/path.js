@@ -77,8 +77,17 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
 
-    path.completedAt = new Date();
-    path.save();
+    if (user.activePathId === null) {
+      return res.json(user);
+    }
+
+    const path = await Path.findById(user.activePathId);
+
+    if (path) {
+      path.completedAt = new Date();
+      path.save();
+    }
+    
     user.activePathId = null;
     await user.save();
     res.json(user);
