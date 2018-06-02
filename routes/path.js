@@ -6,7 +6,9 @@ const Path = mongoose.model("paths");
 const User = mongoose.model("users");
 
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({
+  dest: 'uploads/'
+});
 
 module.exports = app => {
   app.get("/api/current_path", async (req, res) => {
@@ -15,7 +17,9 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({ sessionToken });
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res.status(403).json("Authorization required");
     }
@@ -33,7 +37,9 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({ sessionToken });
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res.status(403).json("Authorization required");
     }
@@ -52,7 +58,9 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({ sessionToken });
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res.status(403).json("Authorization required");
     }
@@ -72,13 +80,17 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({ sessionToken });
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res.status(403).json("Authorization required");
     }
-
-    path.completedAt = new Date();
-    path.save();
+    if (user.activePathId) {
+      const path = Path.findById(user.activePathId)
+      path.completedAt = new Date();
+      path.save();
+    }
     user.activePathId = null;
     await user.save();
     res.json(user);
@@ -93,7 +105,11 @@ module.exports = app => {
   });
 
   app.get("/api/completed_paths", async (req, res) => {
-    const completedPaths = await Path.find({ completedAt: { $exists: true } });
+    const completedPaths = await Path.find({
+      completedAt: {
+        $exists: true
+      }
+    });
     res.json(completedPaths);
   });
 };
