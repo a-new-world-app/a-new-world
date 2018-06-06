@@ -19,7 +19,9 @@ const userSchema = new Schema({
   gameData: {
     type: Object
   },
-  agree: null
+  agree: {
+    type: Number
+  }
 });
 
 mongoose.model("users", userSchema);
