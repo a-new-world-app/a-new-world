@@ -27,8 +27,9 @@ module.exports = app => {
     if (user.activePathId) {
       const path = await Path.findById(user.activePathId);
       return res.json(path);
+    }else {
+      res.json(null);
     }
-    res.json(null);
   });
 
   app.post("/api/paths", async (req, res) => {
