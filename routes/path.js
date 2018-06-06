@@ -24,8 +24,8 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
 
-    if (user.activePathId) {
-      const path = await Path.findById(user.activePathId);
+    if (user.currentPathId) {
+      const path = await Path.findById(user.currentPathId);
       return res.json(path);
     }else {
       res.json(null);
@@ -48,7 +48,7 @@ module.exports = app => {
     const path = new Path(req.body.path);
     path.userId = user.id;
     await path.save();
-    user.activePathId = path.id;
+    user.currentPathId = path.id;
     user.save();
     res.json(path);
   });
@@ -88,18 +88,18 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
 
-    if (user.activePathId === null) {
+    if (user.currentPathId === null) {
       return res.json(user);
     }
 
-    const path = await Path.findById(user.activePathId);
+    const path = await Path.findById(user.currentPathId);
 
     if (path) {
       path.completedAt = new Date();
       path.save();
     }
     
-    user.activePathId = null;
+    user.currentPathId = null;
     await user.save();
     res.json(user);
   });
