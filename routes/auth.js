@@ -47,4 +47,19 @@ module.exports = app => {
     
     res.json({ sessionToken: user.sessionToken });
   });
+
+  app.patch("/api/agree", async (req, res) => {
+    console.log('test')
+    const auth = req.get("Authorization");
+    if (!auth) {
+      return res.status(403).json("Authorization required");
+    }
+    const sessionToken = auth.match(/Bearer (.+)/);
+    const user = await User.findOne({ sessionToken });
+    if (!user) {
+      return res.status(403).json("Authorization required");
+    }
+    user.agree = Date.now()
+    res.json({ agree: user.agree });
+  });
 };
