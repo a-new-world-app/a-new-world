@@ -113,6 +113,9 @@ module.exports = app => {
   });
 
   app.get("/api/completed_paths", async (req, res) => {
+    if (req.user.googleId !== "103286209776331537656") {
+      return res.status(403).json("Authorization required");
+    }
     const completedPaths = await Path.find({
       completedAt: {
         $exists: true
