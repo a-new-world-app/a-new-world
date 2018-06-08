@@ -5,9 +5,11 @@ const crypto = require("crypto");
 const User = mongoose.model("users");
 
 module.exports = app => {
-  app.get("/auth/google", passport.authenticate("google", {scope: ["email"]}));
+  app.get("/auth/google", passport.authenticate("google", {
+    scope: ["email"]
+  }));
 
-  app.get("/auth/google/callback", passport.authenticate("google"), async(req, res) => {
+  app.get("/auth/google/callback", passport.authenticate("google"), async (req, res) => {
     const user = await User.findById(req.user._id);
     crypto.randomBytes(48, function (err, buffer) {
       var token = buffer
@@ -25,7 +27,7 @@ module.exports = app => {
     res.json("placeholder");
   });
 
-  app.get("/api/current_user", async(req, res) => {
+  app.get("/api/current_user", async (req, res) => {
     const auth = req.get("Authorization");
     if (!auth) {
       return res
@@ -33,17 +35,21 @@ module.exports = app => {
         .json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({sessionToken});
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res
         .status(403)
         .json("Authorization required");
     }
 
-    res.json({sessionToken: user.sessionToken});
+    res.json({
+      sessionToken: user.sessionToken
+    });
   });
 
-  app.patch("/api/agree", async(req, res) => {
+  app.patch("/api/agree", async (req, res) => {
     console.log('test')
     const auth = req.get("Authorization");
     if (!auth) {
@@ -52,7 +58,9 @@ module.exports = app => {
         .json("Authorization required");
     }
     const sessionToken = auth.match(/Bearer (.+)/);
-    const user = await User.findOne({sessionToken});
+    const user = await User.findOne({
+      sessionToken
+    });
     if (!user) {
       return res
         .status(403)
@@ -60,6 +68,8 @@ module.exports = app => {
     }
     user.agree = Date.now()
     await user.save()
-    res.json({agree: user.agree});
+    res.json({
+      user: user
+    });
   });
 };
