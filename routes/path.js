@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
-var cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
+const keys = require("../config/keys");
 
 const Path = mongoose.model("paths");
 const User = mongoose.model("users");
@@ -105,9 +106,7 @@ module.exports = app => {
   });
 
   app.post("/api/paths/images", upload.single('picture'), (req, res) => {
-    console.log("file", req.file);
     cloudinary.uploader.upload(req.file.path, image => {
-      console.log(image);
       res.send(image.secure_url);
     });
   });
