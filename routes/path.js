@@ -117,7 +117,7 @@ module.exports = app => {
       return res.status(403).json("Authorization required");
     }
     const key = auth.match(/Bearer (.+)/);
-    if (key !== keys.APIAccessKey) {
+    if (key[1] !== keys.APIAccessKey) {
       return res.status(403).json("Authorization required");
     }
 
